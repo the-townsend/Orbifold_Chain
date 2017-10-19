@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Orbifold_Chain
-{
+{ 
     /// <summary>
     /// Function Token consists of an amount(x), a time point(t), a Token, a value function and a time lag function. 
     /// Token pays out x times function(t) at point in time timelag(t). 
@@ -13,6 +13,7 @@ namespace Orbifold_Chain
     [Serializable]
     public class Function_Token:Token
     {
+        
         /// <summary>
         /// An amount  
         /// </summary>
@@ -29,14 +30,14 @@ namespace Orbifold_Chain
         public Token token;
 
         /// <summary>
-        /// A value function
+        /// The identifier string of a value function
         /// </summary>
-        //public abstract Double ValueFunction(DateTime input_time);
+        public string ValueFunctionName { get; set; }
 
         /// <summary>
-        /// A time function
+        /// The identifier string of a value function
         /// </summary>
-        //public abstract DateTime TimeLagFunction(DateTime input_time);
-        
+        public string TimeLagFunctionName { get; set; }
+
     }
 }

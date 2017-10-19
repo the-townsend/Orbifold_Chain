@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<List_Token xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <tokens>
+    <Token xsi:type="Function_Token">
+      <amount>0</amount>
+      <datetime>2016-03-25T00:00:00</datetime>
+      <token xsi:type="List_Token">
+        <tokens>
+          <Token xsi:type="Base_Token">
+            <coinaddress>
+              <coinaddress>text of coin address</coinaddress>
+            </coinaddress>
+            <description>an example token</description>
+            <hash>some hash</hash>
+          </Token>
+          <Token xsi:type="Base_Token">
+            <coinaddress>
+              <coinaddress>text of coin address</coinaddress>
+            </coinaddress>
+            <description>an example token</description>
+            <hash>some hash</hash>
+          </Token>
+          <Token xsi:type="Base_Token">
+            <coinaddress>
+              <coinaddress>text of coin address</coinaddress>
+            </coinaddress>
+            <description>an example token</description>
+            <hash>some hash</hash>
+          </Token>
+          <Token xsi:type="Base_Token">
+            <coinaddress>
+              <coinaddress>text of coin address</coinaddress>
+            </coinaddress>
+            <description>an example token</description>
+            <hash>some hash</hash>
+          </Token>
+        </tokens>
+      </token>
+      <ValueFunctionName>Also, probably hash of some code that defines the function</ValueFunctionName>
+      <TimeLagFunctionName>Probably the hash of some code that defines the function</TimeLagFunctionName>
+    </Token>
+    <Token xsi:type="List_Token">
+      <tokens>
+        <Token xsi:type="Base_Token">
+          <coinaddress>
+            <coinaddress>text of coin address</coinaddress>
+          </coinaddress>
+          <description>an example token</description>
+          <hash>some hash</hash>
+        </Token>
+      </tokens>
+    </Token>
+  </tokens>
+</List_Token>

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Orbifold_Chain
 {
+    // Old example before interfaces were used. Will be deleted once interface to dll set up. *** IGNORE ***
     [Serializable]
     public class Example_Function_Token : Function_Token
     {

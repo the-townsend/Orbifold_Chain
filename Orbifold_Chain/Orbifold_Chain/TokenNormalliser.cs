@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 namespace Orbifold_Chain
 {
     /// <summary>
-    /// Takes a token and (i) puts any list component to the front and (ii) collapses any multiple security token (security token whose
+    /// NormalToken: Takes a token and (i) puts any list component to the front and (ii) collapses any multiple security token (security token whose
     /// underlying token is a security token, etc) into a single security token. Done recursively so that the underlying token(s)
-    /// of any normalised Token is either a base Token, Function Token, Option Token or Security Token. 
+    /// of any normalised Token is either a base Token, Function Token, Option Token or Security Token. Returns a Token or Null. 
+    /// NormalListToken etc: applies to specific Token clases (e.g. List_Token) as part of the recursive definition of NormalToken. 
     /// </summary>
-    class TokenNormaliser
+    public class TokenNormaliser
     {
         public Token NormalToken(Token token)
         {
@@ -47,6 +48,7 @@ namespace Orbifold_Chain
         }
         public List_Token NormalListToken(List_Token listtoken)
         {
+            List_Token return_value = null;
             List_Token newnormallisttoken = new List_Token();
             for (int i = 0; i < listtoken.tokens.Count; i++)
             {
@@ -64,10 +66,13 @@ namespace Orbifold_Chain
                     newnormallisttoken.tokens.Add(normaltoken);
                 }
             }
-            return newnormallisttoken;
+            return_value = newnormallisttoken;
+
+            return return_value;
         }
         public Token NormalFunctionToken(Function_Token functiontoken)
         {
+            Token return_value = null;
             Token normaltoken = NormalToken(functiontoken.token);
             if (normaltoken is List_Token)
             {
@@ -79,12 +84,11 @@ namespace Orbifold_Chain
                     newfunctiontoken.amount = functiontoken.amount;
                     newfunctiontoken.datetime = functiontoken.datetime;
                     newfunctiontoken.token = normallisttoken.tokens[i];
-                    //
-                    // **** Function and Lag elements are missing *****
-                    //
+                    newfunctiontoken.ValueFunctionName = functiontoken.ValueFunctionName;
+                    newfunctiontoken.TimeLagFunctionName = functiontoken.TimeLagFunctionName;
                     newnormallisttoken.tokens.Add(newfunctiontoken);
                 }
-                return newnormallisttoken;
+                return_value = newnormallisttoken;
             }
             else
             {
@@ -92,14 +96,16 @@ namespace Orbifold_Chain
                 newfunctiontoken.amount = functiontoken.amount;
                 newfunctiontoken.datetime = functiontoken.datetime;
                 newfunctiontoken.token = normaltoken;
-                //
-                // **** Function and Lag elements are missing *****
-                //
-                return newfunctiontoken;
+                newfunctiontoken.ValueFunctionName = functiontoken.ValueFunctionName;
+                newfunctiontoken.TimeLagFunctionName = functiontoken.TimeLagFunctionName;
+                return_value = newfunctiontoken;
             }
+
+            return return_value;
         }
         public Token NormalSecurityToken(Security_Token securitytoken)
         {
+            Token return_value = null;
             Token normaltoken = NormalToken(securitytoken.token);
             if (normaltoken is List_Token)
             {
@@ -113,20 +119,47 @@ namespace Orbifold_Chain
                     newsecuritytoken.asset = securitytoken.asset;
                     newsecuritytoken.liability = securitytoken.liability;
                     newsecuritytoken.token = normallisttoken.tokens[i];
+                    newsecuritytoken = NormalSecurityToken(newsecuritytoken) as Security_Token;
                     newnormallisttoken.tokens.Add(newsecuritytoken);
                 }
-                return newnormallisttoken;
+                return_value = newnormallisttoken;
             }
             else
             {
-                var newsecuritytoken = new Security_Token();
-                newsecuritytoken.issuercoinaddress = securitytoken.issuercoinaddress;
-                newsecuritytoken.listcoinaddresses = securitytoken.listcoinaddresses;
-                newsecuritytoken.asset = securitytoken.asset;
-                newsecuritytoken.liability = securitytoken.liability;
-                newsecuritytoken.token = normaltoken;
-                return newsecuritytoken;
+                if (normaltoken is Security_Token)
+                {
+                    var normalsecuritytoken = normaltoken as Security_Token;
+                    Security_Token newnormalsecuritytoken = new Security_Token();
+                    newnormalsecuritytoken.issuercoinaddress = normalsecuritytoken.issuercoinaddress;
+
+                    if(!securitytoken.listcoinaddresses.coinaddresses.Except(normalsecuritytoken.listcoinaddresses.coinaddresses).Any())
+                    {
+                        newnormalsecuritytoken.listcoinaddresses = securitytoken.listcoinaddresses;    // Takes onward transfer restriction list of addresses from parent
+                    }
+                    else
+                    {
+                        throw new Exception("Security Token cannot add addresses allowable for onward transfer to those addresses given in child Security");
+                    }
+
+                    newnormalsecuritytoken.asset = normalsecuritytoken.asset;
+                    newnormalsecuritytoken.liability = normalsecuritytoken.liability;
+                    newnormalsecuritytoken.token = normalsecuritytoken.token;
+                   
+                    return_value = newnormalsecuritytoken;
+                }
+                else
+                {
+                    Security_Token newnormalsecuritytoken = new Security_Token();
+                    newnormalsecuritytoken.issuercoinaddress = securitytoken.issuercoinaddress;
+                    newnormalsecuritytoken.listcoinaddresses = securitytoken.listcoinaddresses;  
+                    newnormalsecuritytoken.asset = securitytoken.asset;
+                    newnormalsecuritytoken.liability = securitytoken.liability;
+                    newnormalsecuritytoken.token = normaltoken;  
+                    
+                    return_value = newnormalsecuritytoken;
+                }
             }
+            return return_value;
         }
     }
 }

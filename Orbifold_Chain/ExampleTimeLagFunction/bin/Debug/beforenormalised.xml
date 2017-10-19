@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<Security_Token xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <issuercoinaddress>
+    <coinaddress>text of coin address</coinaddress>
+  </issuercoinaddress>
+  <listcoinaddresses>
+    <coinaddresses>
+      <Coin_Address>
+        <coinaddress>text of coin address</coinaddress>
+      </Coin_Address>
+      <Coin_Address>
+        <coinaddress>text of another coin address</coinaddress>
+      </Coin_Address>
+      <Coin_Address>
+        <coinaddress>text of coin address</coinaddress>
+      </Coin_Address>
+    </coinaddresses>
+  </listcoinaddresses>
+  <asset>false</asset>
+  <liability>true</liability>
+  <token xsi:type="Option_Token">
+    <startdatetime>2018-03-27T00:00:00</startdatetime>
+    <enddatetime>2018-03-29T00:00:00</enddatetime>
+    <listamountstokens>
+      <listamountstokens>
+        <Amount_Token_Pair>
+          <amount>100</amount>
+          <token xsi:type="Base_Token">
+            <coinaddress>
+              <coinaddress>text of coin address</coinaddress>
+            </coinaddress>
+            <description>an example token</description>
+            <hash>some hash</hash>
+          </token>
+        </Amount_Token_Pair>
+        <Amount_Token_Pair>
+          <amount>200</amount>
+          <token xsi:type="List_Token">
+            <tokens>
+              <Token xsi:type="Function_Token">
+                <amount>0</amount>
+                <datetime>2016-03-25T00:00:00</datetime>
+                <token xsi:type="List_Token">
+                  <tokens>
+                    <Token xsi:type="Base_Token">
+                      <coinaddress>
+                        <coinaddress>text of coin address</coinaddress>
+                      </coinaddress>
+                      <description>an example token</description>
+                      <hash>some hash</hash>
+                    </Token>
+                    <Token xsi:type="Base_Token">
+                      <coinaddress>
+                        <coinaddress>text of coin address</coinaddress>
+                      </coinaddress>
+                      <description>an example token</description>
+                      <hash>some hash</hash>
+                    </Token>
+                    <Token xsi:type="Base_Token">
+                      <coinaddress>
+                        <coinaddress>text of coin address</coinaddress>
+                      </coinaddress>
+                      <description>an example token</description>
+                      <hash>some hash</hash>
+                    </Token>
+                    <Token xsi:type="Base_Token">
+                      <coinaddress>
+                        <coinaddress>text of coin address</coinaddress>
+                      </coinaddress>
+                      <description>an example token</description>
+                      <hash>some hash</hash>
+                    </Token>
+                  </tokens>
+                </token>
+                <ValueFunctionName>Also, probably hash of some code that defines the function</ValueFunctionName>
+                <TimeLagFunctionName>Probably the hash of some code that defines the function</TimeLagFunctionName>
+              </Token>
+              <Token xsi:type="List_Token">
+                <tokens>
+                  <Token xsi:type="Base_Token">
+                    <coinaddress>
+                      <coinaddress>text of coin address</coinaddress>
+                    </coinaddress>
+                    <description>an example token</description>
+                    <hash>some hash</hash>
+                  </Token>
+                </tokens>
+              </Token>
+            </tokens>
+          </token>
+        </Amount_Token_Pair>
+        <Amount_Token_Pair>
+          <amount>300</amount>
+          <token xsi:type="List_Token">
+            <tokens>
+              <Token xsi:type="Base_Token">
+                <coinaddress>
+                  <coinaddress>text of coin address</coinaddress>
+                </coinaddress>
+                <description>an example token</description>
+                <hash>some hash</hash>
+              </Token>
+              <Token xsi:type="Base_Token">
+                <coinaddress>
+                  <coinaddress>text of coin address</coinaddress>
+                </coinaddress>
+                <description>an example token</description>
+                <hash>some hash</hash>
+              </Token>
+              <Token xsi:type="Base_Token">
+                <coinaddress>
+                  <coinaddress>text of coin address</coinaddress>
+                </coinaddress>
+                <description>an example token</description>
+                <hash>some hash</hash>
+              </Token>
+              <Token xsi:type="Base_Token">
+                <coinaddress>
+                  <coinaddress>text of coin address</coinaddress>
+                </coinaddress>
+                <description>an example token</description>
+                <hash>some hash</hash>
+              </Token>
+            </tokens>
+          </token>
+        </Amount_Token_Pair>
+      </listamountstokens>
+    </listamountstokens>
+  </token>
+</Security_Token>

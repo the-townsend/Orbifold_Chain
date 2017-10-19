@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 namespace Orbifold_Chain
 {
     [Serializable]
+
     public class Coin_Address
     {
         public string coinaddress;    // issuer address   
     }
+
     public class List_Coin_Addresses
     {
         public List_Coin_Addresses()

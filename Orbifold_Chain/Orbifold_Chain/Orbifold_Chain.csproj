@@ -47,6 +47,8 @@
     <Compile Include="Base-Token.cs" />
     <Compile Include="Example_Function_Token.cs" />
     <Compile Include="Block.cs" />
+    <Compile Include="IValueFunction.cs" />
+    <Compile Include="ITimeFunction.cs" />
     <Compile Include="Security-Token.cs" />
     <Compile Include="List-Amounts-Tokens.cs" />
     <Compile Include="Option-Token.cs" />

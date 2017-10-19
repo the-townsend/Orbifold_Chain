@@ -1,0 +1,7 @@
+C:\Users\User\Documents\GitHub\Orbifold_Chain\Orbifold_Chain\ExampleValueFunction\bin\Debug\ExampleValueFunction.dll
+C:\Users\User\Documents\GitHub\Orbifold_Chain\Orbifold_Chain\ExampleValueFunction\bin\Debug\ExampleValueFunction.pdb
+C:\Users\User\Documents\GitHub\Orbifold_Chain\Orbifold_Chain\ExampleValueFunction\bin\Debug\ExampleValueFunction.dll.CodeAnalysisLog.xml
+C:\Users\User\Documents\GitHub\Orbifold_Chain\Orbifold_Chain\ExampleValueFunction\bin\Debug\ExampleValueFunction.dll.lastcodeanalysissucceeded
+C:\Users\User\Documents\GitHub\Orbifold_Chain\Orbifold_Chain\ExampleValueFunction\obj\Debug\ExampleValueFunction.csprojResolveAssemblyReference.cache
+C:\Users\User\Documents\GitHub\Orbifold_Chain\Orbifold_Chain\ExampleValueFunction\obj\Debug\ExampleValueFunction.dll
+C:\Users\User\Documents\GitHub\Orbifold_Chain\Orbifold_Chain\ExampleValueFunction\obj\Debug\ExampleValueFunction.pdb

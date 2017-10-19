@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<List_Token xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <tokens>
+    <Token xsi:type="Base_Token">
+      <coinaddress>
+        <coinaddress>text of coin address</coinaddress>
+      </coinaddress>
+      <description>an example token</description>
+      <hash>some hash</hash>
+    </Token>
+  </tokens>
+</List_Token>

@@ -15,7 +15,7 @@ namespace Orbifold_Chain
     [XmlInclude(typeof(Example_Function_Token))]
     [XmlInclude(typeof(Option_Token))]
     [Serializable]
-    public abstract class Token
+    public class Token
     {
     }
 }
