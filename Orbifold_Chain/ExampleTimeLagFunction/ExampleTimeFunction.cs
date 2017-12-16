@@ -1,5 +1,6 @@
 ﻿using Orbifold_Chain;
 using System;
+using Functions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,11 @@ namespace ExampleTimeLagFunction
 
         public DateTime TimeLagFunction(DateTime input_time)
         {
-            return input_time.AddDays(1);
+            User_Functions n = new User_Functions();
+
+            var m = n.AddOneDayFunction(input_time);
+
+            return n.AddOneDayFunction(m);
         }
     }
 }

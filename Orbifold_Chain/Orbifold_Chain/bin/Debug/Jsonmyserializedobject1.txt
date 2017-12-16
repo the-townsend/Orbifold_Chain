@@ -1,0 +1,1 @@
+{"tokens":[{"coinaddress":{"coinaddress":"text of coin address"},"description":"an example token","hash":"some hash"}]}

@@ -10,7 +10,7 @@ namespace Orbifold_Chain
     /// A block consists of a list or (value,Token) pairs a buyer(receiver) coin-address and a seller(payer) coin-address,
     /// flags for coin-address failure and trade status (Booked, Cancelled or Pending).  
     /// </summary>
-    [Serializable]
+   
     public class Block
     {
         /// <summary>
@@ -44,7 +44,7 @@ namespace Orbifold_Chain
         public Boolean sellerfail;
 
         /// <summary>
-        /// Trade statusSeller fail flag
+        /// Trade status
         /// </summary>
         public enum TransactionStatus {Booked, Cancelled, Pending};
 

@@ -5,6 +5,10 @@ using System.Reflection;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using Newtonsoft.Json;
+
+//Line to test push into Gituhub
 
 namespace Orbifold_Chain
 {
@@ -12,33 +16,46 @@ namespace Orbifold_Chain
     {
         static void Main(string[] args)
         {
-            
-
-            //Code for loading into memory an example TimeLagFunction from a dll 
+   
+            // Code for loading into memory an example TimeLagFunction from a dll 
            
             Assembly assembly = Assembly.LoadFrom("ExampleTimeLagFunction.dll");
             Type exampletimelagfunctiontype = assembly.GetType("ExampleTimeLagFunction.ExampleTimeFunction");
             ITimeFunction exampletimelagfunction = Activator.CreateInstance(exampletimelagfunctiontype) as ITimeFunction;
 
+            // Samples of querying the loaded assembly
+
+            Boolean b = assembly.IsDynamic;
+
+            Console.WriteLine("Test for whether assembly of the example dll is dynamic: {0}",b);
+
+            var m = assembly.GetModule("ExampleTimeLagFunction.dll");
+
+            var v = m.ModuleVersionId;
+
+            Console.WriteLine("Module Version Id: {0}", v); // e.g. fd254650 - b927 - 4a64 - b16c - c2f49e6993a2 = can we use this as suitable hash for function sign-off?
+            
             // Sample showing exmaple time lag function changing a date. 
 
             DateTime startdatetime = new DateTime(2018, 3, 27);
             
             Console.WriteLine("The value of startdatetime before I called the example time function is {0}", startdatetime);
 
-            DateTime newishdatetime = exampletimelagfunction.TimeLagFunction(startdatetime);
+            DateTime newdatetime = exampletimelagfunction.TimeLagFunction(startdatetime);
 
-            Console.WriteLine("The value after I called the example time function is {0}", newishdatetime);
+            Console.WriteLine("The value after I called the example time function is {0}", newdatetime);
 
             // End code and sample
-            
+
+            Console.WriteLine();
+
             // Expected form of code for URI lookup functionality.
 
-            using (var client = new WebClient())
-            {
-                var contents = client.DownloadString("http://download.finance.yahoo.com/d/quotes.csv?s=MSFT&f=l1");
-                Console.WriteLine("Microsoft stock price: {0}",contents);
-            }
+            //using (var client = new WebClient())
+            //{
+            //   var contents = client.DownloadString("http://download.finance.yahoo.com/d/quotes.csv?s=MSFT&f=l1");
+            //    Console.WriteLine("Microsoft stock price: {0}",contents);
+            //}
 
             // Example token constructions.
 
@@ -111,6 +128,7 @@ namespace Orbifold_Chain
             ot.startdatetime = new DateTime(2018, 3, 27);
             ot.enddatetime = new DateTime(2018, 3, 29);
             ot.listamountstokens = mylats;
+            
 
             Security_Token st = new Security_Token();
             st.issuercoinaddress = my_coinaddress;
@@ -124,20 +142,51 @@ namespace Orbifold_Chain
             Token nt = new Token();
             Token nnt = new Token();
 
-            nt = st;      // note that 'equals' has not been implemented on the Token class. This is false, but the XMLs are identical.
-
+            nt = st;      
             Serialization_Helper.SerializeObject(nt, "beforenormalised.xml");
 
             nnt = n.NormalToken(nt);
             
             Serialization_Helper.SerializeObject(nnt, "normalised.xml");
 
+            // 'equals' has not been implemented on the Token class. The next line returns `false', but the XMLs are identical (when nt=st):
+
             Console.WriteLine("normalised equals original? {0}", nnt.Equals(nt));
+
+
+            Console.WriteLine("Hash before normalisation {0}", nt.GetHashCode());
+            Console.WriteLine("Hash after normalisation {0}", nnt.GetHashCode());
 
             Console.WriteLine("Type of original: {0}", nt.GetType());
             Console.WriteLine("Type of normalised: {0}", nnt.GetType());
 
             // Serialization and de-serialization examples.
+
+
+            var jsonserialized = JsonConvert.SerializeObject(lt1);
+            var jsonserialized3 = JsonConvert.SerializeObject(lt3);
+
+            Console.WriteLine("my JSON serialized object 1 is {0}", jsonserialized);
+
+            List_Token jsondeserialized = JsonConvert.DeserializeObject<List_Token>(jsonserialized);
+
+
+            File.WriteAllText("Jsonmyserializedobject1.txt", jsonserialized);
+            File.WriteAllText("Jsonmyserializedobject3.txt", jsonserialized3);
+
+
+
+
+            String newjsonstring = File.ReadAllText("Jsonmyserializedobject1.txt");
+
+            List_Token deserializedjson = JsonConvert.DeserializeObject<List_Token>(newjsonstring);
+
+            
+            Console.WriteLine("my JSON serialized object 1 now looks like {0}", newjsonstring);
+
+            Console.WriteLine("How long is the deserialized JSON token object 1: " + deserializedjson.tokens.Count);
+            Console.WriteLine("How long is the original token object 1: " + lt1.tokens.Count);
+
 
             Serialization_Helper.SerializeObject(lt1, "myserializedobject1.xml");
 

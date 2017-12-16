@@ -14,6 +14,7 @@ namespace Orbifold_Chain
     /// </summary>
     public class TokenNormaliser
     {
+        
         public Token NormalToken(Token token)
         {
             Token return_value = null;
